@@ -9,10 +9,10 @@ class Queue
 {
 private:
 	T *A;            
-	const int size;          // ìàêñèìàëüíîå êîëè÷åñòâî ýëåìåíòîâ â î÷åðåäè
-	int begin,               // íà÷àëî î÷åðåäè
-		end;                 // êîíåö î÷åðåäè
-	int count;               // ñ÷åò÷èê ýëåìåíòîâ
+	const int size;        
+	int begin,            
+		end;               
+	int count;            
 
 public:
 	Queue(int = 10);         
@@ -23,7 +23,7 @@ public:
 };
 
 
-/** \func êîíñòðóêòîð ïî óìîë÷àíèþ */
+
 template<typename T>
 Queue<T>::Queue(int sizeQueue) :
 size(sizeQueue), begin(0), end(0), count(0)
@@ -33,14 +33,13 @@ size(sizeQueue), begin(0), end(0), count(0)
 
 
 
-/** \func äåñòðóêòîð */
 template<typename T>
 Queue<T>::~Queue()
 {
 	delete[] A;
 }
 
-/** \func ôóíêöèÿ äîáàâëåíèÿ ýëåìåíòà â î÷åðåäü */
+
 template<typename T>
 void Queue<T>::add(const T &newElem)
 {
@@ -51,7 +50,7 @@ void Queue<T>::add(const T &newElem)
 		end -= size + 1; 
 }
 
-/** \func ôóíêöèÿ óäàëåíèÿ ýëåìåíòà èç î÷åðåäè */
+
 template<typename T>
 T Queue<T>::del()
 {
@@ -63,7 +62,7 @@ T Queue<T>::del()
 	return returnValue;
 }
 
-/** \func ôóíêöèÿ ïîëó÷åíèÿ çíà÷åíèÿ ïåðâîãî ýëåìåíòà  */
+
 template<typename T>
 void Queue<T>::get()
 {
