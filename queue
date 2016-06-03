@@ -1,0 +1,97 @@
+# TIMP-3
+#include <iostream>
+#include <string>
+#include <cassert>
+using namespace std;
+
+template<typename T>
+class Queue
+{
+private:
+	T *A;            
+	const int size;          // ìàêñèìàëüíîå êîëè÷åñòâî ýëåìåíòîâ â î÷åðåäè
+	int begin,               // íà÷àëî î÷åðåäè
+		end;                 // êîíåö î÷åðåäè
+	int count;               // ñ÷åò÷èê ýëåìåíòîâ
+
+public:
+	Queue(int = 10);         
+	~Queue();                
+	void add(const T &); 
+	T del(); 
+	void get();
+};
+
+
+/** \func êîíñòðóêòîð ïî óìîë÷àíèþ */
+template<typename T>
+Queue<T>::Queue(int sizeQueue) :
+size(sizeQueue), begin(0), end(0), count(0)
+{
+	A = new T[size + 1];
+}
+
+
+
+/** \func äåñòðóêòîð */
+template<typename T>
+Queue<T>::~Queue()
+{
+	delete[] A;
+}
+
+/** \func ôóíêöèÿ äîáàâëåíèÿ ýëåìåíòà â î÷åðåäü */
+template<typename T>
+void Queue<T>::add(const T &newElem)
+{
+	assert(count < size);
+	A[end++] = newElem;
+	count++;
+	if (end > size)
+		end -= size + 1; 
+}
+
+/** \func ôóíêöèÿ óäàëåíèÿ ýëåìåíòà èç î÷åðåäè */
+template<typename T>
+T Queue<T>::del()
+{
+	assert(count > 0);
+	T returnValue = A[begin++];
+	count--;
+	if (begin > size)
+		begin -= size + 1; 
+	return returnValue;
+}
+
+/** \func ôóíêöèÿ ïîëó÷åíèÿ çíà÷åíèÿ ïåðâîãî ýëåìåíòà  */
+template<typename T>
+void Queue<T>::get()
+{
+	int i = begin;
+	cout << A[i] << endl;
+}
+
+int main()
+{
+	Queue<int> a(5); 
+
+	int i = 0;
+	int b;
+
+	while (i++ < 5)
+	{
+		cin >> b;
+		a.add(b);
+	}
+	
+	cout << endl;
+	a.get(); 
+
+	a.del();
+	a.get(); 
+	a.del();
+	a.get();
+
+	system("pause");
+	return 0;
+}
